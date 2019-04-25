@@ -7,6 +7,7 @@
     "version": "8.0.1.0.0",
     'author': 'VentorTech',
     'website': 'https://ventor.tech/',
+    'license': 'LGPL-3',
     'installable': True,
     'images': ['static/description/icon.png'],
     'description': """
