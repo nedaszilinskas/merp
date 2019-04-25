@@ -32,6 +32,11 @@ class StockConfigSettings(models.TransientModel):
     module_merp_custom_logotype = fields.Boolean(
         'Enable Customer Logotype')
 
+    module_merp_internal_warehouse = fields.Boolean(
+        string='Allows to select default warehouse that will be pre-selected'
+        ' for user when using menu "Internal Transfer"',
+    )
+
     @api.depends('company_id')
     def _compute_merp_version(self):
         manifest = http.addons_manifest.get('merp_base', None)
