@@ -2,19 +2,19 @@
 # Copyright 2019 VentorTech OU
 # Part of Ventor modules. See LICENSE file for full copyright and licensing details.
 
-from openerp import models, fields, api, _
+from openerp import models, fields as odoo_fields, api, _
 
 
-class message_wizard(models.TransientModel):
+class MessageWizard(models.TransientModel):
     _name = 'message.wizard'
 
-    message = fields.Text('Message')
+    message = odoo_fields.Text('Message')
 
     @api.model
     def default_get(self, fields):
-        return {
-            'message': self.env.context.get('message')
-        }
+        res = super(MessageWizard, self).default_get(fields)
+        res['message'] = self.env.context.get('message')
+        return res
 
     @api.multi
     def wizard_view(self):

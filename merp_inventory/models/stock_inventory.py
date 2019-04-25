@@ -2,19 +2,18 @@
 # Copyright 2019 VentorTech OU
 # Part of Ventor modules. See LICENSE file for full copyright and licensing details.
 
-from openerp import api, fields, models, _
+from openerp import api, models
 
 
 class Inventory(models.Model):
     _inherit = "stock.inventory"
 
     def __init__(self, pool, cr):
-        init_res = super(Inventory, self).__init__(pool, cr)
+        super(Inventory, self).__init__(pool, cr)
         selection_add = ('ready', 'Waiting for Validation')
         if selection_add not in self.INVENTORY_STATE_SELECTION:
             # add new state 'ready' before 'done'
             type(self).INVENTORY_STATE_SELECTION.insert(-1, selection_add)
-        return init_res
 
     @api.multi
     def finish_inventory(self):

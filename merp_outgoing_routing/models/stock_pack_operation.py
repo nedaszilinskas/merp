@@ -2,7 +2,7 @@
 # Copyright 2019 VentorTech OU
 # Part of Ventor modules. See LICENSE file for full copyright and licensing details.
 
-from openerp import models, fields, api
+from openerp import models, api
 
 
 class StockPackOperation(models.Model):

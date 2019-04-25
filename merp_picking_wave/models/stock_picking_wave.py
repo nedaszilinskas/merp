@@ -2,7 +2,7 @@
 # Copyright 2019 VentorTech OU
 # Part of Ventor modules. See LICENSE file for full copyright and licensing details.
 
-from openerp import models, fields, api, _
+from openerp import models, api, _
 
 
 class PickingWave(models.Model):
@@ -72,7 +72,6 @@ class PickingWave(models.Model):
                     else:
                         if not picking.pack_operation_ids:
                             picking.do_prepare_partial()
-                        all_processed = True
                         if picking.pack_operation_ids.filtered(lambda o: o.qty_done < o.product_qty):
                             on_hold = True
                         else:
@@ -92,8 +91,8 @@ Wave is moved to "On Hold" for manual processing.
                 return {
                     'message': message_obj.with_context(message=message).wizard_view()
                 }
-            else:
-                return True
+
+            return True
 
 
 class StockPicking(models.Model):
@@ -111,7 +110,7 @@ class StockPicking(models.Model):
             ('state', 'in', ('assigned', 'partially_available')),
             '|',
             ('name', '=', name),
-            ('origin','=', name)])
+            ('origin', '=', name)])
 
     @api.multi
     def do_transfer(self):
@@ -121,9 +120,9 @@ class StockPicking(models.Model):
             wave = picking.wave_id
             wtype = wave and wave.picking_wave_type
             if behavior == 1 and wtype and \
-               ((wtype.warehouse_id.pick_type_id.id == wtype.id and \
-               wtype.warehouse_id.delivery_steps != 'ship_only') or \
-               wtype.code == 'outgoing'):
+               ((wtype.warehouse_id.pick_type_id.id == wtype.id and
+                wtype.warehouse_id.delivery_steps != 'ship_only') or
+                    wtype.code == 'outgoing'):
                 # Find backorder and remove it
                 back_orders = self.search([
                     ('backorder_id', '=', picking.id)])

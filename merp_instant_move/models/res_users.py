@@ -5,7 +5,7 @@
 from openerp import models, fields
 
 
-class res_users(models.Model):
+class ResUsers(models.Model):
     _inherit = 'res.users'
 
     instant_add_more = fields.Boolean(

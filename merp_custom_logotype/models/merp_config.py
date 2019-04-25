@@ -2,8 +2,7 @@
 # Copyright 2019 VentorTech OU
 # Part of Ventor modules. See LICENSE file for full copyright and licensing details.
 
-from openerp import models, fields, api, _
-from openerp.exceptions import Warning
+from openerp import models, fields as odoo_fields, api, _, exceptions
 import base64
 import struct
 import logging
@@ -14,11 +13,11 @@ LOGOTYPE_W = 500
 LOGOTYPE_H = 500
 
 
-class merpConfigSettings(models.TransientModel):
+class MerpConfigSettings(models.TransientModel):
     _inherit = 'merp.config.settings'
 
-    merp_logotype_file = fields.Binary('mERP logotype file')
-    merp_logotype_name = fields.Char('mERP logotype name')
+    merp_logotype_file = odoo_fields.Binary('mERP logotype file')
+    merp_logotype_name = odoo_fields.Char('mERP logotype name')
 
     @api.model
     def get_default_merp_logotype(self, fields):
@@ -43,8 +42,14 @@ class merpConfigSettings(models.TransientModel):
         dat = base64.decodestring(record.merp_logotype_file)
         png = (dat[:8] == '\211PNG\r\n\032\n' and (dat[12:16] == 'IHDR'))
         if not png:
-            raise Warning(_('Apparently, the logotype is not a .png file.'))
-        w, h = struct.unpack('>LL', dat[16:24])
-        if int(w) < LOGOTYPE_W or int (h) < LOGOTYPE_H:
-            raise Warning(_('The logotype can\'t be less than %sx%s px.') \
-                % (LOGOTYPE_W, LOGOTYPE_H))
+            raise exceptions.Warning(
+                _('Apparently, the logotype is not a .png file.')
+            )
+        width, height = struct.unpack('>LL', dat[16:24])
+        if int(width) < LOGOTYPE_W or int(height) < LOGOTYPE_H:
+            raise exceptions.Warning(
+                _('The logotype can\'t be less than %sx%s px.')
+                % (LOGOTYPE_W, LOGOTYPE_H)
+            )
+
+        return True

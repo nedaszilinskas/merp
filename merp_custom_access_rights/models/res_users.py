@@ -5,11 +5,11 @@
 from openerp import models, fields
 
 
-class res_users(models.Model):
+class ResUsers(models.Model):
     _inherit = 'res.users'
 
     stock_location_id = fields.Many2one(
-        'stock.location',
+        comodel_name='stock.location',
         string='Force Source Location for Instant Move',
         required=False,
     )

@@ -26,7 +26,7 @@ class StockLocation(models.Model):
         strategy = self.env.user.company_id.outgoing_routing_strategy
         strategy_order = self.env.user.company_id.outgoing_routing_order
 
-        if not strategy in self:
+        if strategy not in self:
             return
 
         order = '%s %s' % (strategy, ['asc', 'desc'][strategy_order])

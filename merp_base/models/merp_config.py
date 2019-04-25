@@ -5,12 +5,12 @@
 from openerp import models, fields, api
 
 
-class merpConfigSettings(models.TransientModel):
+class MerpConfigSettings(models.TransientModel):
     _name = 'merp.config.settings'
     _inherit = 'res.config.settings'
 
 
-class merpConfig(models.Model):
+class MerpConfig(models.Model):
     _name = 'merp.config'
     _rec_name = 'key'
 
@@ -23,7 +23,9 @@ class merpConfig(models.Model):
 
     @api.model
     def get_param(self, key, default=False):
-        params = self.search_read([('key', '=', key)], fields=['value'], limit=1)
+        params = self.search_read([
+            ('key', '=', key),
+        ], fields=['value'], limit=1)
         return params[0]['value'] if params else default
 
     @api.model
