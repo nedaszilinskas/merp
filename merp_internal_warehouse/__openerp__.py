@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2017 Ventor, Xpansa Group (<https://ventor.tech/>).
+#    Copyright (C) 2019 Ventor, Xpansa Group (<https://ventor.tech/>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Lesser General Public License as
@@ -19,20 +19,21 @@
 ##############################################################################
 
 {
-    'name': 'Ventor Receiving Wave Access Rights',
+    'name': 'Ventor Internal Warehouse',
     "version": "8.0.1.0.0",
     'author': 'Ventor, Xpansa Group',
     'website': 'https://ventor.tech/',
     'installable': True,
     'images': ['static/description/main_banner.png'],
     'description': """
-Ventor Receiving Wave Access Rights
+Ventor Internal Warehouse
 """,
-    'summary': 'Ventor Receiving Wave Access Rights',
+    'summary': 'Ventor Internal Warehouse',
     'depends': [
-        'merp_custom_access_rights',
+        'merp_base',
     ],
     'data': [
-        'security/groups.xml',
+        'views/res_users.xml',
+        'views/stock_warehouse.xml',
     ],
 }
