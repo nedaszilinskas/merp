@@ -15,6 +15,12 @@
         <delete model="res.groups" id="merp_picking_wave.merp_menu_picking_wave"/>
         <delete model="res.groups" id="merp_picking_wave_base.merp_picking_wave_allow_done"/>
 
+        <!-- delete legacy records created in merp_inventory module
+             note openerp skips deletion of missing records by default
+         -->
+
+        <delete model="res.groups" id="merp_inventory.merp_inventory_allow_ready_state"/>
+
         <!-- Ventor menu management -->
         <record model="ir.module.category" id="module_category_merp_menu_application">
             <field name="name">Ventor Menu Management</field>
