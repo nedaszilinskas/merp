@@ -5,7 +5,7 @@
 {
     'name': 'Ventor Base',
     "version": "8.0.1.1.0",
-    'author': 'Ventor, Xpansa Group',
+    'author': 'VentorTech',
     'website': 'https://ventor.tech/',
     'installable': True,
     'images': ['static/description/main_banner.png'],
